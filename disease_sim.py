@@ -70,7 +70,7 @@ def update(frameNum, img, grid, N, PI, PR, PRI):
                 # Use PI to decide if susceptible cell is infected
                 inf_neighbors = num_inf_neighbours(i, j, grid)
                 prob_infected = 1 - (1 - PI) ** inf_neighbors
-                newGrid[i][j] = 0 + (prob_infected < r.random())
+                newGrid[i][j] = (prob_infected < r.random())
 
     # Update data
     img.set_data(newGrid)
@@ -88,9 +88,9 @@ def update_pop(frameNum, ax, grid, R, S, I):
     I.append(curr_i)
 
     ax.clear()
-    ax.plot(R, label="Recovered")
-    ax.plot(S, label="Susceptible")
-    ax.plot(I, label="Infected")
+    ax.plot(R, label="Recovered", color='lightblue')
+    ax.plot(S, label="Susceptible", color='yellowgreen')
+    ax.plot(I, label="Infected", color='red')
     ax.legend()
 
 def draw_grid():
@@ -140,7 +140,7 @@ def main():
     # set animation update interval
     updateInterval = 50
 
-    fig, axs = plt.subplots(1, 2, figsize=(15,4))
+    fig, axs = plt.subplots(1, 2, figsize=(12,4))
     fig.canvas.set_window_title(GNAME+ ' Infection Sim: Pop='+ str(N * N) + ' IPOP=' + str(IPOP) + ' PI=' + str(PI) + ' PR=' + str(PR) + ' PRI=' + str(PRI))
 
     ax1 = axs[0]
